@@ -1,0 +1,554 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><!-- hexo injector head_begin start -->
+      <link href="https://unpkg.com/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+      <style type="text/css">/* 轮播边框 */
+.splide {
+    /* 边框颜色和宽度 */
+    border: 2px solid var(--carousel-border-color);
+    /* 阴影 */
+    box-shadow: 0px 4px 8px var(--carousel-shadow-color);
+    /* 圆角 */
+    border-radius: var(--carousel-border-radius);
+}
+
+/* 确保图片的显示与适配 */
+.splide__slide img {
+    width: 100%;
+    height: 100%;
+    /* 确保图片全部显示且占满组件 */
+    object-fit: contain;
+}
+
+.carousel-container {
+    visibility: inherit;
+    /* 调整与上方元素的距离 */
+    margin-top: 20px;
+    /* 调整与下方元素的距离 */
+    margin-bottom: 20px;
+}
+
+/* 图片简介 */
+.carousel-caption {
+    min-height: 2em;
+    /* 设置行高，让文字垂直居中 */
+    line-height: 2em;
+    text-align: center;
+    font-size: 0.9em;
+    font-style: italic;
+    padding: 6px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 左右切换按钮 */
+.splide__arrow {
+    background: transparent;
+    align-items: center;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    height: 5em;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5em;
+    z-index: 10;
+}
+
+/* 禁用状态的切换按钮 */
+.splide__arrow:disabled {
+    opacity: 0;
+}
+
+/* 左右切换按钮的定位 */
+.splide__arrow--prev {
+    left: 0;
+}
+
+.splide__arrow--next {
+    right: 0;
+}
+
+/* 切换按钮中的箭头图标 */
+.splide__arrow svg {
+    /* 动态设置箭头颜色 */
+    fill: var(--carousel-arrow-color);
+    height: 2.5em;
+    transition: fill 0.2s linear;
+    width: 2.5em;
+}
+
+.splide__arrow:hover:not(:disabled) svg {
+    /* 悬停时的箭头颜色 */
+    fill: var(--carousel-arrow-hover-color);
+}
+
+/* 隐藏难看的选中边框 */
+.splide__arrow:focus-visible {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide.is-focus-in .splide__arrow:focus {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide__pagination__page:focus-visible {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide.is-focus-in .splide__pagination__page:focus {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+/* 分页按钮样式 */
+.splide__pagination {
+    bottom: 1em;
+    left: 0;
+    padding: 0 1em;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+/* 分页按钮外观 */
+.splide__pagination__page {
+    background: var(--carousel-pagination-color);
+    border: 0;
+    border-radius: 2.5px;
+    display: inline-block;
+    height: 5px;
+    margin: 3px;
+    width: 20px;
+    transition: background-color 0.2s linear;
+}
+
+.splide__pagination__page.is-active {
+    background: var(--carousel-pagination-active-color);
+}
+
+.splide__pagination__page:hover {
+    background: var(--carousel-pagination-hover-color);
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+/* 使用伪元素增加点击区域 */
+.splide__pagination__page::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: -18px;
+    left: -4px;
+    right: -4px;
+}
+
+.splide__pagination__page.is-active::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    bottom: -12px;
+    left: -1px;
+    right: -1px;
+}
+
+/* 在放大时按比例缩放，配合 JS 进行调整 */
+.zoomable {
+    /* 缩放时按比例显示 */
+    object-fit: contain;
+}
+
+/* Zooming 时调整图片的最大尺寸，但不影响宽高比例 */
+.zooming {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    object-fit: contain !important;
+}</style>
+      <!-- hexo injector head_begin end -->
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_zyaire.jpg" />
+	<link rel="shortcut icon" href="/img/logo_zyaire.jpg">
+	
+				    <title>
+    Zyaire's Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta name="keywords" content="zyaire" />
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.png') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+					    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+						
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+			
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">ZYAIRE</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/china/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/korea/" title="韩国图库">
+		                韩国图库
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/ZyaireXv" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a title="instagram" href="https://www.instagram.com/zyaireshu/" target="_blank" rel="noopener">
+                            <i class="icon fa fa-instagram"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(/images/gallery/tiffany_blue.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >About Me</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <h1 id="About-Me"><a href="#About-Me" class="headerlink" title="About Me"></a>About Me</h1><p>Hello! My name is Zyaire. Welcome to my personal blog where I share my thoughts, experiences, and projects.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>I have a passion for technology and creativity. Over the years, I’ve worked on various projects that combine these interests, ranging from software development to  art.</p>
+<h2 id="Interests"><a href="#Interests" class="headerlink" title="Interests"></a>Interests</h2><ul>
+<li><strong>Technology</strong>: I enjoy exploring new technologies and keeping up with the latest trends in the tech world.</li>
+<li><strong>Creativity</strong>: I love expressing my creativity through various mediums, including handcraft and writing.</li>
+<li><strong>Travel</strong>: I have a passion for traveling and experiencing different cultures.</li>
+</ul>
+<h2 id="Projects"><a href="#Projects" class="headerlink" title="Projects"></a>Projects</h2><p>Here are a few projects I’ve worked on:</p>
+<ol>
+<li><p><strong>Project A</strong>: A mobile app for Sony Assurance.<br>   <img src="/images/resume/gooddrive.png" alt="Project A Screenshot"></p>
+</li>
+<li><p><strong>Project B</strong>: A mobile app for Sony Assurance.<br>   <img src="/images/resume/odekake.png" alt="Project B Artwork"></p>
+</li>
+<li><p><strong>Project C</strong>: 我的AI创业项目.<br>   <img src="/images/resume/AIMIDD.png" alt="Project C Artwork"></p>
+</li>
+</ol>
+<h2 id="Contact"><a href="#Contact" class="headerlink" title="Contact"></a>Contact</h2><p>Feel free to reach out to me via email at <a href="mailto:&#122;&#121;&#x67;&#x40;&#122;&#121;&#x61;&#x69;&#x72;&#x65;&#x2e;&#x74;&#x6f;&#112;">zyg@zyaire.top</a>.</p>
+<p>Thank you for visiting my blog!</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a target="_blank" rel="noopener" href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+<!-- hexo injector body_end start -->
+      <script src="https://unpkg.com/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+      <script>
+        window.splideStyles = {"arrowColor":"#fc8d5d","arrowHoverColor":"#fc6423","paginationColor":"#fc8d5d","paginationActiveColor":"#fc6423","paginationHoverColor":"#fc6423","borderRadius":"1px","borderColor":{"light":"#eee","dark":"#444"},"shadowColor":{"light":"rgba(0, 0, 0, 0.1)","dark":"rgba(0, 0, 0, 0.3)"}};
+        window.splideDarkMode = 'auto';
+        window.mediumZoomEnabled = false;
+      </script>
+      <script type="text/javascript">// 页面加载事件监听
+document.addEventListener('DOMContentLoaded', function () {
+    splideLoadingHandler();
+    initGlobalMediumZoom();
+});
+
+document.addEventListener('pjax:success', function () {
+    splideLoadingHandler();
+    initGlobalMediumZoom();
+});
+
+// PJAX开启时销毁所有splide实例，不然开启自动播放时图片简介和图片对不上
+document.addEventListener('pjax:send', () => {
+    destroySplideInstances();
+});
+
+window.splideInstances = [];
+function destroySplideInstances() {
+    window.splideInstances.forEach((instance) => {
+        instance.destroy(); // 销毁实例
+    });
+    window.splideInstances = []; // 清空数组
+}
+
+// Splid 加载处理
+function splideLoadingHandler() {
+    // 检查页面是否含有轮播图片
+    const splideEl = document.querySelector('.splide');
+    if (!splideEl) {
+        return; // 如果不存在轮播，则不执行初始化
+    }
+
+    // 检查是否开启Next主题的动画
+    const isMotionEnabled = typeof CONFIG !== 'undefined' && CONFIG && CONFIG.motion && CONFIG.motion.enable;
+    if (isMotionEnabled) {
+        // Motion 开启时延迟加载轮播组件，等待动画完成。把组件加入动画有bug，一直搞不定，只能曲线救国
+        setTimeout(function () {
+            // 初始化轮播组件
+            initSplide();
+        }, 500);  // 延迟 500ms，确保动画完成后再初始化
+    } else {
+        // Motion 关闭时立即初始化
+        initSplide();
+    }
+
+    // 处理 fancybox，默认设置会切换焦点图片造成轮播组件混乱
+    if (typeof Fancybox !== "undefined") {
+        adjustFancybox();
+    }
+
+    // 初始化轮播组件中的 Medium Zoom
+    if (mediumZoomEnabled) {
+        initCarouselMediumZoom();
+    }
+
+    // 应用主题样式
+    applySplideStyle();
+}
+
+// 初始化 Splide
+function initSplide() {
+    const splideElements = document.querySelectorAll('.splide');
+    splideElements.forEach(splideEl => {
+        const options = JSON.parse(splideEl.getAttribute('data-splide'));
+        // 如果轮播组件中只有一张图片，则隐藏箭头
+        const slideCount = splideEl.querySelectorAll('.splide__slide').length;
+        if (slideCount <= 1) {
+            options.arrows = false;
+        }
+        // 简介设置
+        const splide = new Splide(splideEl, options);
+        splide.on('mounted move', function () {
+            const activeSlide = splide.Components.Slides.getAt(splide.index);
+            const caption = activeSlide.slide.dataset.caption;
+            const captionId = splideEl.getAttribute('data-caption-id');
+
+            const captionElement = document.getElementById(captionId);
+            if (captionElement) {
+                captionElement.innerText = caption || '';  // 如果没有简介，设置为空字符串
+            }
+        });
+        splide.mount();
+        window.splideInstances.push(splide); // 将实例存储到数组中   
+    });
+}
+
+// 应用主题明暗样式
+function applySplideStyle() {
+    const applyThemeStyles = (theme, splideStyles) => {
+        const borderColor = theme === 'dark' ? splideStyles.borderColor.dark : splideStyles.borderColor.light;
+        const shadowColor = theme === 'dark' ? splideStyles.shadowColor.dark : splideStyles.shadowColor.light;
+        document.documentElement.style.setProperty('--carousel-border-color', borderColor);
+        document.documentElement.style.setProperty('--carousel-shadow-color', shadowColor);
+        document.documentElement.style.setProperty('--carousel-border-radius', splideStyles.borderRadius);
+        document.documentElement.style.setProperty('--carousel-arrow-color', splideStyles.arrowColor);
+        document.documentElement.style.setProperty('--carousel-arrow-hover-color', splideStyles.arrowHoverColor);
+        document.documentElement.style.setProperty('--carousel-pagination-color', splideStyles.paginationColor);
+        document.documentElement.style.setProperty('--carousel-pagination-active-color', splideStyles.paginationActiveColor);
+        document.documentElement.style.setProperty('--carousel-pagination-hover-color', splideStyles.paginationHoverColor);
+    };
+
+    let theme = 'light';
+    if (window.splideDarkMode === 'auto') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } else if (window.splideDarkMode === 'true') {
+        theme = 'dark';
+    }
+    applyThemeStyles(theme, window.splideStyles);
+
+    if (window.splideDarkMode === 'auto') {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            applyThemeStyles(e.matches ? 'dark' : 'light', window.splideStyles);
+        });
+    }
+}
+
+// 初始化非轮播图片的 Medium Zoom
+function initGlobalMediumZoom() {
+    // 检查是否启用 medium-zoom
+    if (!mediumZoomEnabled) {
+        return;
+    }
+    const zoomOutsideCarousel = mediumZoom('img:not(.splide .zoomable)', {
+        background: 'rgba(0, 0, 0, 0.8)',
+        margin: 24
+    });
+}
+
+// 初始化轮播组件中的 Medium Zoom
+function initCarouselMediumZoom() {
+    const zoomCarousel = mediumZoom('.zoomable', {
+        background: 'rgba(0, 0, 0, 0.8)',
+        margin: 24,
+        onOpen: (zoom) => {
+            const img = zoom.target; // 获取正在缩放的图片
+            img.classList.add('zooming'); // 添加一个缩放时的 class
+        },
+        onClose: (zoom) => {
+            const img = zoom.target; // 获取缩放的图片
+            img.classList.remove('zooming'); // 移除缩放时的 class
+        }
+    });
+
+    zoomCarousel.on('open', () => {
+        // 隐藏箭头和分页按钮
+        document.querySelectorAll('.splide__arrow, .splide__pagination').forEach(el => {
+            el.style.display = 'none';
+        });
+    });
+
+    zoomCarousel.on('close', () => {
+        // 重新显示箭头和分页按钮
+        document.querySelectorAll('.splide__arrow, .splide__pagination').forEach(el => {
+            el.style.display = '';
+        });
+    });
+}
+
+// fancybox 兼容调整
+function adjustFancybox() {
+    Fancybox.bind("[data-fancybox]", {
+        placeFocusBack: false,  // 禁止 Fancybox 关闭时滚动回页面的焦点位置
+    });
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === "childList") {
+                removeFancyboxFromClones();
+            }
+        });
+    });
+
+    // 观察整个文档的 DOM 变化
+    observer.observe(document, { childList: true, subtree: true });
+}
+
+// 移除克隆 Slide 中的 Fancybox 链接
+function removeFancyboxFromClones() {
+    const cloneSlides = document.querySelectorAll('.splide__slide--clone');
+
+    cloneSlides.forEach((slide) => {
+        const fancyboxLink = slide.querySelector('a.fancybox');
+        if (fancyboxLink) {
+            const img = fancyboxLink.querySelector('img');
+            if (img) {
+                // 将 img 挪出 a 标签
+                fancyboxLink.replaceWith(img);
+            }
+        }
+    });
+}</script>      
+    <!-- hexo injector body_end end --></body>
+
+
+
+				
+
+</html>

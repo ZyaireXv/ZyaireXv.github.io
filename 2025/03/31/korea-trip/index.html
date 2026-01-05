@@ -1,0 +1,803 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><!-- hexo injector head_begin start -->
+      <link href="https://unpkg.com/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+      <style type="text/css">/* 轮播边框 */
+.splide {
+    /* 边框颜色和宽度 */
+    border: 2px solid var(--carousel-border-color);
+    /* 阴影 */
+    box-shadow: 0px 4px 8px var(--carousel-shadow-color);
+    /* 圆角 */
+    border-radius: var(--carousel-border-radius);
+}
+
+/* 确保图片的显示与适配 */
+.splide__slide img {
+    width: 100%;
+    height: 100%;
+    /* 确保图片全部显示且占满组件 */
+    object-fit: contain;
+}
+
+.carousel-container {
+    visibility: inherit;
+    /* 调整与上方元素的距离 */
+    margin-top: 20px;
+    /* 调整与下方元素的距离 */
+    margin-bottom: 20px;
+}
+
+/* 图片简介 */
+.carousel-caption {
+    min-height: 2em;
+    /* 设置行高，让文字垂直居中 */
+    line-height: 2em;
+    text-align: center;
+    font-size: 0.9em;
+    font-style: italic;
+    padding: 6px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 左右切换按钮 */
+.splide__arrow {
+    background: transparent;
+    align-items: center;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    height: 5em;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5em;
+    z-index: 10;
+}
+
+/* 禁用状态的切换按钮 */
+.splide__arrow:disabled {
+    opacity: 0;
+}
+
+/* 左右切换按钮的定位 */
+.splide__arrow--prev {
+    left: 0;
+}
+
+.splide__arrow--next {
+    right: 0;
+}
+
+/* 切换按钮中的箭头图标 */
+.splide__arrow svg {
+    /* 动态设置箭头颜色 */
+    fill: var(--carousel-arrow-color);
+    height: 2.5em;
+    transition: fill 0.2s linear;
+    width: 2.5em;
+}
+
+.splide__arrow:hover:not(:disabled) svg {
+    /* 悬停时的箭头颜色 */
+    fill: var(--carousel-arrow-hover-color);
+}
+
+/* 隐藏难看的选中边框 */
+.splide__arrow:focus-visible {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide.is-focus-in .splide__arrow:focus {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide__pagination__page:focus-visible {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide.is-focus-in .splide__pagination__page:focus {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+/* 分页按钮样式 */
+.splide__pagination {
+    bottom: 1em;
+    left: 0;
+    padding: 0 1em;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+/* 分页按钮外观 */
+.splide__pagination__page {
+    background: var(--carousel-pagination-color);
+    border: 0;
+    border-radius: 2.5px;
+    display: inline-block;
+    height: 5px;
+    margin: 3px;
+    width: 20px;
+    transition: background-color 0.2s linear;
+}
+
+.splide__pagination__page.is-active {
+    background: var(--carousel-pagination-active-color);
+}
+
+.splide__pagination__page:hover {
+    background: var(--carousel-pagination-hover-color);
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+/* 使用伪元素增加点击区域 */
+.splide__pagination__page::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: -18px;
+    left: -4px;
+    right: -4px;
+}
+
+.splide__pagination__page.is-active::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    bottom: -12px;
+    left: -1px;
+    right: -1px;
+}
+
+/* 在放大时按比例缩放，配合 JS 进行调整 */
+.zoomable {
+    /* 缩放时按比例显示 */
+    object-fit: contain;
+}
+
+/* Zooming 时调整图片的最大尺寸，但不影响宽高比例 */
+.zooming {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    object-fit: contain !important;
+}</style>
+      <!-- hexo injector head_begin end -->
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_zyaire.jpg" />
+	<link rel="shortcut icon" href="/img/logo_zyaire.jpg">
+	
+				    <title>
+    Zyaire's Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta name="keywords" content="zyaire" />
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.png') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+					    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+						
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+			
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">ZYAIRE</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/china/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/korea/" title="韩国图库">
+		                韩国图库
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/ZyaireXv" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a title="instagram" href="https://www.instagram.com/zyaireshu/" target="_blank" rel="noopener">
+                            <i class="icon fa fa-instagram"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(/images/korea/合照.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >韩国之旅</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <style>
+    
+    /*手机*/
+        @media screen and (max-width:600px){
+            .center-div{
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+        /*平板*/
+        @media screen and (min-width:600px) and (max-width:960px){
+            .center-div{
+                margin: 0 auto;
+                width: 80%;
+            }
+        }
+        /*PC*/
+        @media screen and (min-width:960px){
+            .center-div{
+                margin: 0 auto;
+                width: 50%;
+            }
+        }
+    .red-bold{
+        color: #ff66b3;
+        font-weight: bold;
+    }
+    .blue-bold{
+        color: #85edff;
+        font-weight: bold;
+    }
+ </style>   
+<h1 id="韩国之旅"><a href="#韩国之旅" class="headerlink" title="韩国之旅"></a>韩国之旅</h1><h2 id="前期心理"><a href="#前期心理" class="headerlink" title="前期心理"></a>前期心理</h2><p>大概是从2024年的12月开始，我有了离职的想法，倒不是因为这份工作不好，相反这份工作很稳定，也轻松，并且也挺有成就感，我还是挺喜欢这份工作的。但是当时的我陷入了虚无的泥沼中，心中无时无刻不涌起一股强烈的无意义感。不单单是对工作，更对我人生的当下以及未来。于是我毅然决然决定辞职了！</p>
+<p>但是辞职之后干什么呢？如果什么事情都不做的话，不过是从一种虚无堕入另一种虚无。其实在2023年我就决定要出去看一看了，23年的时候，我申请了澳大利亚的打工度假签证，最长可以在澳洲待三年，那个时候的想法很简单，就是为了润。但是23年的打工度假签直接跳过了！24年传来的消息是需要花钱才能参与这个打工度假签的申请，当时我有点生气，所以24年我就没有继续提交。</p>
+<p>正巧的是24年公司有一个机会让我去日本出差，当时领导询问我的意愿，我的意愿是——长期留在日本。从24年3月开始办签证，一年的人文技术签证，签证很快就下来了，正当一切看似都很顺利的时候，项目黄了，于是我去日本的机会也没有了，但是那个时候我还是很渴望去日本，并且长期留在日本的，但是直到11月的时候，第二次去日本的机会也没有了。那个时候我明白了一个道理，一个很简单的道理——我应该用自己的双手去实现自己的梦想！如果我想着依赖外力来达成自己的目的的话，最后往往可能自己的目的没有达成，更会错过许多的机会。24年的澳洲WHV我就错过了。</p>
+<p>时间到了12月，那个时候已经确定离职了，虽然有不舍，毕竟我是当时最熟悉那两个app的人，还是有点感情的，但是那种无意义感，以及对未来的迷茫已经几乎将我杀死，我一定要走！！</p>
+<p>我非常感谢我的好兄弟，张桑。他从日本回来之后，给我推荐了一个网站，helpx，这是一个打工换宿的信息交换网站，host在网站上发布信息，然后guest应征。所以我决定去打工换宿，顺便等待25年澳洲的WHV，第一站我选择了韩国。</p>
+<p>之所以选择韩国有以下几点原因，第一、韩国是发达国家，法制健全，我去换宿的话，安全上没有顾虑。第二、韩国离中国很近，很早之前我就有去韩国度周末的想法，从南京飞韩国只要两个小时，南京去上海做高铁也要两个小时。第三、韩国的签证比较容易办。就是以上几点促使我决定第一站去韩国。然后我就在helpx上浏览host的信息，看了很多，最终选择了一个host叫<strong>Shalom-free community</strong>.于是确定了我在25年三月去韩国进行为期一个月的换宿，其实一个开始我还是有很多顾及的，包括对于这个网站的不信任，对于上面发布信息的不信任。但是我还是决定出发，就因为彪悍的人生不需要解释，想做就去做！</p>
+<p>时间飞快，到了25年三月，3&#x2F;5我从中国飞韩国，但是在那个时候，我还是没有和host取得直接联系，我们都是通过邮件联系，我安装了KakaoTalk,但是迟迟等不到消息。可是机票已经买好了，箭在弦上不得不发，我硬着头皮去到了韩国。刚落地仁川机场，我就迷失了，我不知道去哪，不知道怎么去。这个时候我检查了一下gmail，发现了一封来自host的邮件，邮件里说无法通过kakaotalk和我联系，我尝试通过kakaotalk发消息给host，也失败了。原因是我注册的手机号不是韩国手机号。于是我建议通过WhatsApp联系，但是那个时候，我还没有WhatsApp账号，不过好消息是我知道学校的位置，于是我决定先去了再说，等我买好汽车票之后，我找不到在哪里坐车，问了一个帅气的韩国小哥，他带我去找工作人员，最后成功坐上了汽车，十分感谢那位小哥。</p>
+<p>汽车到了加平，我下车了，其实我也不确定是不是这个地方，我问了司机，他说就是这，我才下车。在车站里，我用车站wifi注册了WhatsApp，和host取得了联系，她们让我等待20分钟，然后来接我，此刻我终于安心了。</p>
+<h2 id="换宿经历"><a href="#换宿经历" class="headerlink" title="换宿经历"></a>换宿经历</h2><p>host接到我之后，我们到了学校，在学校里我见到了14个孩子，就在这里我和他们度过了非常宝贵的20天，以至于这段经历将成为我一生的宝贵财富。</p>
+<h3 id="小黄"><a href="#小黄" class="headerlink" title="小黄"></a>小黄</h3><div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-u1ygtonlc">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="小黄"><img src="/images/korea/IMG_4322.JPG" alt="小黄" class="zoomable"></li><li class="splide__slide" data-caption="小黄"><img src="/images/korea/IMG_4370.JPG" alt="小黄" class="zoomable"></li><li class="splide__slide" data-caption="小黄"><img src="/images/korea/IMG_4323.JPG" alt="小黄" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-u1ygtonlc" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+学校里养了一只非常可爱的小狗叫小黄，我知道韩文怎么叫，但是不会写。每天我都会去摸摸它，它总是会让我想起我小时候养的一只小狗，它也叫小黄。小黄是一只非常胆小的狗狗，它非常害怕比它大的物体，有的时候我站着它就不会过来，只有蹲下它才会过来。它的力气非常大，每次带它出去散步，我都有点牵不住它。
+
+<h3 id="水车"><a href="#水车" class="headerlink" title="水车"></a>水车</h3><p>我在这个学校里有很多任务，第一个是教计算机，因为我本来就是程序员，所以我将会开计算机课，虽然对于开发网站我不是非常在行，但是对于他们这个年纪的基础启蒙，应该还是可以做到的，我打算教他们简单的html以及css知识。第二个是教中文，计算机是大家都上的，但是中文是选修课。第三个是做一个水车，因为我加入了他们的farming group，他们有一个花园，叫<span class="red-bold">romantic garden</span>。然后孩子们想要一个水车，于是我当仁不让地接下了这个任务。第四个是学校搭建一个网站，因为学校之前的网站已经不存在了，正好和我专业对口，所以我要为学校搭建一个网站。</p>
+<h4 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h4><div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-oa3lxa6zg">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="第一版设计"><img src="/images/korea/水车-1.png" alt="第一版设计" class="zoomable"></li><li class="splide__slide" data-caption="第二版设计"><img src="/images/korea/水车-2.png" alt="第二版设计" class="zoomable"></li><li class="splide__slide" data-caption="第三版设计"><img src="/images/korea/水车-3.png" alt="第三版设计" class="zoomable"></li><li class="splide__slide" data-caption="第三版设计"><img src="/images/korea/水车-3-1.png" alt="第三版设计" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-oa3lxa6zg" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+我真的怎么也想不到，之前学的机械设计，居然在这个时候派上用场了。第一时间，我就画了一个水车的3d模型，给host看，她看后表示非常惊讶。其他学生看到了也觉得非常专业，但是以我现在的角度来看，第一版的设计是非常糟糕的，只能算是一个草图，完全没有可行性把它做出来。它的支撑完全是实心的，然后它有七个支撑，七个支撑的话肯定会导致不平衡。于是我换了第二版设计，第二版设计虽然支撑改成了木板，但是还是七个支撑，当我意识到问题之后，又进行了重新设计，所以第二版设计只有一部分。
+
+<p>第三版设计才是最终的设计，当然其中做了很多的修改，最终才形成现在的样子。</p>
+<h4 id="制造"><a href="#制造" class="headerlink" title="制造"></a>制造</h4><p>我们打算使用学校里的闲置木材来建造这个水车，第一天我们开始建造的时候就遇到了困难，我们虽然有一台电锯，但是我们没有量角器，就无法确定角度，因为我们要锯一个67.5°的角度。那天host带我和一个孩子我们一起去加平镇上找量角器，但是找了一圈都没有找到。</p>
+<p>最后我想出一个主意，我们可以把角度打印出来，然后对着纸就可以确定准确的67.5°</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4446.PNG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/110f1e916cd7da9230f1b5c16ddd90ef.PNG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+下午host让一个学生买回了量角器，但是我们已经把16片木材都锯好了，可惜的是我没有拍下来。
+
+<p>第二天，学生有其他的课程要参加，于是我开始一个人建造这个水车，那一天真的非常非常累，但是成果斐然，我把水车的一半已经做好了。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4444.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4477.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4494.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4498.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4499.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+唯一美中不足的是，木材是比较轻的木材，很干燥，我把钉子顶上去之后有些许开裂。
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-nyms402d9">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="木板干燥开裂"><img src="/images/korea/IMG_4500.JPG" alt="木板干燥开裂" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-nyms402d9" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+这就是第一周的成果，第二周我们继续建造水车，由于第二周有其他学校的学生来做客，所以我们有了帮手，第二周的成果非常大，我们把两半都已经组装完成了，然后开始组装中间的连接部分，可惜的是，我没有拍更多的照片，那些宝贵的经历现在都只存在于我的记忆中了，希望我不会忘记吧！
+
+<h3 id="中文课"><a href="#中文课" class="headerlink" title="中文课"></a>中文课</h3><p>虽然我是中国人，但是要让我教中文，我还是有一点不知所措的，因为我知道中文很难，特别是发音，然而我只有两周的时间，在短短两周的时间显然是一个很艰巨的挑战，但是我就喜欢挑战。于是我开始在网上搜索“声母韵母表”，并且打印下来给他们用。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/中文课-1.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/中文课-2.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/中文课-3.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4434.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+我打算先教他们基础的<span class="blue-bold">声母</span>和<span class="blue-bold">韵母</span>,在准备的过程中，我自己也学到了很多。
+
+<p>让我感到开心的是，大家对中文都很感兴趣，特别是bee，mio和dora。bee她本身自己就在自学中文，她偶尔也会对我说上几句；dora我感觉他很有语言天赋；mio更不用说，她本身就会三国语言。我自认为课程过程还是比较轻松的，不过她们有没有真的学到什么我就不知道了，也没有考试。不过我可以确定的是，他们一定记住了两个词<span class="red-bold">“吻”</span>和<span class="red-bold">“问”</span>。</p>
+<blockquote>
+<p>我和他们讲了一个笑话，如果将来他们爱上了一个中国人就对他&#x2F;她说：<span class="blue-bold">“我可以吻你吗？”</span>,如果他&#x2F;她回答可以，就直接亲上去，如果回答不行，就假装中文不好，其实我想说的是，我可以问你吗？最后dora还在给我的t恤上留下了这段话。</p>
+</blockquote>
+<p>第二周的中文课，我继续教他们声母和韵母，就在第二周中文课的前一天，我们吃了韩国特色的<span class="red-bold">糕</span>，然后bee教我怎么读。我教她中文的糕怎么说，但是她说成了<span class="red-bold">狗</span>。我觉得在初学一门语言的时候出现这样的小问题是很正常的，会让我们的印象更为深刻，我还和他们说了我一开始学英语时弄混了mosquito和moustache闹出的笑话。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-zu6c8whkd">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="韩国特色的糕"><img src="/images/korea/IMG_4469.JPG" alt="韩国特色的糕" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-zu6c8whkd" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<h3 id="编程课"><a href="#编程课" class="headerlink" title="编程课"></a>编程课</h3><p>我是从18年，开始学习计算机的，在那之前我学的是机械，甚至连高中都没考上，直接上的五年制大专。但是我在18年彻底改变了我的职业规划，我决定成为一名程序员。在那之前我一心想成为一名优秀的技术工人，我参加了数控机床维修比赛，也拿过很多奖，但是当我真的踏入工厂实习的时候，我确信这不是我想要的，于是我拼命学习计算机，最终考上了大学，拿到了计算机科学和机械工程两个学位。这些孩子，比我当时刚开始学计算的时候还要小，我有点担心他们学不会，我至今还记得当时自学java的时候，那种被折磨的感受。所以我选择教他们做网页，做网页简单，并且见效快，所写即所得，更能激起他们的学习兴趣。后来june经常向我请教关于编程的问题，他说他的梦想是做游戏。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/编程课-1.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/编程课-2.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/编程课-3.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/编程课-4.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+可惜的是我没有拍下他们的作品，他们每个人都有自己很特别的想法，都能够用我交给他们的知识去构建符合自己想法的网页，我觉得这样很好。他们也确实做出了一些成果，我很惊讶，他们每一个人无论在做任何事的时候，都会一丝不苟地去做，这比我认识的大多数中国小孩好很多，他们有想法，有思考，有规划，可以说是德智体美劳全面发展的好孩子，可以预见他们的未来将会有无限可能！多希望我小时候也能在这样的学校里学习啊，而不是做一个小镇做题家。
+
+<h3 id="为学校建站"><a href="#为学校建站" class="headerlink" title="为学校建站"></a>为学校建站</h3><p>在这个学校做的最后一件事就是为学校搭建了一个官方网站<a target="_blank" rel="noopener" href="https://www.shalomfree.kr/">샬롬자유교육공동체</a>。关于建站，我经验还是比较丰富的，因为我有七八年的博客经验，从一开始typeco，到wordpress，再到现在的hexo。所以我选择的技术栈是hexo+github pages，hexo是一个静态博客框架，github pages是一个静态网站托管服务，两者结合可以实现一个简单易用的静态网站。这样最简单，除了域名支出之外就没有其他的额外支出了。</p>
+<p>建站过程还是挺简单的，毕竟也没有多少内容，而且host的意思是这个网站是一个中转站，可以通过这个网站导航到其他的Instagram，Facebook,Youtube等社交媒体，并且他们已经有了一个博客，所以这个网站只是起到锦上添花的作用。</p>
+<h3 id="免费健身房"><a href="#免费健身房" class="headerlink" title="免费健身房"></a>免费健身房</h3><p>虽然学校的位置是一个较为偏僻的小山村，但是小镇中却有一个健身房，是免费使用的。而且健身房的机械比较完善，环境也比较好，整洁没有异味，最让我惊讶的是健身房内居然有免费的淋浴，还可以泡脚，简直不可思议。单论配置，这个健身房甚至比乐刻还要豪华，超过了一大部分的商业健身房，点赞。并且那个地方不光有健身房，还有电子阅览室，有教室，瑜伽室，都是免费使用的。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4655.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4656.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+健身房的负责人大爷人也非常好，我第一次去的时候器材没有放回原位，他把我叫过去，指给我看一个标语，虽然看不懂，但是也大概能猜到是什么意思，大爷也是笑嘻嘻的，最后也没有让我放回去，而是他自己放回去了。
+
+<p>虽然有一个免费的健身房，但是我还是感觉我的力量退步了很多，第一是我没有像在国内那样频繁训练。第二是韩国的饮食并不偏向于高蛋白饮食，这可能会造成肌肉流失。第三是健身房最重的哑铃才15kg，我平常都是50磅推肩，极限30kg。我想要继续高强度训练也没有这个条件。</p>
+<h3 id="小镇景色"><a href="#小镇景色" class="headerlink" title="小镇景色"></a>小镇景色</h3><p>小镇虽然偏僻，但是景色还是相当不错的，我特别喜欢绕着小镇的河边散步，小河流经一座小山脚下，河里经常有成群结队的鸳鸯，我就静静地看着它们，感觉时间也慢了下来。我经常望着那座小山，想着爬上去是什么景色，但是直到现在这个愿望也没有实现。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4338.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4418.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4486.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4487.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4626.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4637.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+
+<h4 id="小镇雪景"><a href="#小镇雪景" class="headerlink" title="小镇雪景"></a>小镇雪景</h4><p>刚到这个小镇的第一天，刚刚下过一场雪，四处都是一片白茫茫的，第二周，我经历了在韩国的第一个雪天，雪下的很大，但是走得也快，下午基本上就没有什么雪了，所以我们很珍惜开春前的最后一场雪，学校组织我们打雪仗，我都不记得我上一次打雪仗是什么时候了。那时的我就感觉好像成了和他们一样年纪的小孩，在嬉戏的过程中，我真的忘却了一切，沉浸其中，这是我人生中最难忘的一次打雪仗。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/snow-2.jpg" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4681.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/snow-1.jpg" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4684.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_4685.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+
+<h3 id="南海徒步"><a href="#南海徒步" class="headerlink" title="南海徒步"></a>南海徒步</h3><p>最后一周我们去南海进行徒步，这本应该是最应该着重记录的，但是我的文字实在是太过苍白。一路上，开满了各种各样的小花，我们听着海浪的声音，闻着海风的味道，徒步走在蜿蜒的山谷中，虽然很累，但是一路上充满了欢笑，每一个人都坚持了下来，他们的毅力，活力，不畏困难，都深深地感染着我。很幸运，能够遇见这样一群孩子。</p>
+<p>我们在帐篷里露营，记得那一天他们在帐篷里唱歌，外面狂风大作，但是他们的歌声却十分让人心安，在昏暗的灯光下，每一个人都投入到歌唱中，多希望时间就在那一刻定格，那时的我真的被深深感染了，真是我毕生难忘的经历。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_4912.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_4920.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_4923.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5094.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5095.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5101.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5102.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5211.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5214.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5215.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5237.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5240.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5320.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+
+<p>夕阳很美，朝阳也很美，可惜的是这一周我都没有看到火烧云，生命中总是充满遗憾啊。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5015.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5018.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5019.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5058.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5061.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5063.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5070.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5071.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5167.JPG" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/views/IMG_5196.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+
+<p>最后分别的时候，他们送给了我每个人留有一句话的T-Shirt。我真的非常感动，每每看到这件T-Shirt,我总有一种潸然泪下的冲动，这是我收到过最宝贵的礼物，它代表在韩国的经历，代表了宝贵的精神财富。我想，这段经历将在未来每一个孤独寒冷的夜晚给予我一丝温暖的慰藉，非常感谢。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' >
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_6679.jpg" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/合照.jpg" alt="" class="zoomable"></li><li class="splide__slide" data-caption=""><img src="/images/korea/IMG_5446.JPG" alt="" class="zoomable"></li></ul>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+
+<h3 id="插曲"><a href="#插曲" class="headerlink" title="插曲"></a>插曲</h3><p>在这个学校打工换宿结束之后，我打算去釜山玩一圈，让我惊喜的是host帮我找到一个可以免费住的地方。事情是这样的，那一天我们徒步结束之后去到一个小餐馆吃晚餐，我吃完之后host把我叫过去，说是给我介绍住宿的地方，原来是参观的老板在釜山有房子，可以让我免费住。运营参观的是一个非常热情的阿姨，她的餐馆非常有特色，白色的墙面上画满了格式各样的涂鸦。我去到釜山之后在那个阿姨家住了十天左右，前五天都是我一个人住，她在第六天来了釜山，然后就每天开车带我出去玩，请我吃东西，我想请她吃饭的，但是每次都被她拒绝了。最后我给阿姨买了一盆花作为礼物，还写了一封感谢信。非常感谢那位阿姨对我的帮助，我下次再去韩国的话，一定会再去拜访这位阿姨的。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-1pf4pinhf">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="餐馆的涂鸦"><img src="/images/korea/IMG_5254.JPG" alt="餐馆的涂鸦" class="zoomable"></li><li class="splide__slide" data-caption="餐馆的涂鸦"><img src="/images/korea/IMG_5255.JPG" alt="餐馆的涂鸦" class="zoomable"></li><li class="splide__slide" data-caption="我的留言"><img src="/images/korea/IMG_5468.JPG" alt="我的留言" class="zoomable"></li><li class="splide__slide" data-caption="阿姨的房子"><img src="/images/korea/IMG_5465.JPG" alt="阿姨的房子" class="zoomable"></li><li class="splide__slide" data-caption="餐馆的位置"><img src="/images/korea/IMG_5596.JPG" alt="餐馆的位置" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-1pf4pinhf" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>很幸运能够在打工换宿的第一站就遇到这么多热情，友善的人，更增强了我继续下一站的信心。其中还有好多非常有意思的事情，但是用文字表述实在的太苍白，比如说我们在雪地里打雪仗，他们体育课玩一些非常有趣的游戏，还有篝火晚会，还有各式各样的桌游，甚至于每一节课在我看来都非常有趣，或许我应该学着做视频来记录我未来流浪生涯中每一点每一滴的美好。最后谢谢大家能看到这里，希望我的文字能给你带来一些帮助，也希望你能和我分享你的故事。再见！</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a target="_blank" rel="noopener" href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+<!-- hexo injector body_end start -->
+      <script src="https://unpkg.com/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+      <script>
+        window.splideStyles = {"arrowColor":"#fc8d5d","arrowHoverColor":"#fc6423","paginationColor":"#fc8d5d","paginationActiveColor":"#fc6423","paginationHoverColor":"#fc6423","borderRadius":"1px","borderColor":{"light":"#eee","dark":"#444"},"shadowColor":{"light":"rgba(0, 0, 0, 0.1)","dark":"rgba(0, 0, 0, 0.3)"}};
+        window.splideDarkMode = 'auto';
+        window.mediumZoomEnabled = false;
+      </script>
+      <script type="text/javascript">// 页面加载事件监听
+document.addEventListener('DOMContentLoaded', function () {
+    splideLoadingHandler();
+    initGlobalMediumZoom();
+});
+
+document.addEventListener('pjax:success', function () {
+    splideLoadingHandler();
+    initGlobalMediumZoom();
+});
+
+// PJAX开启时销毁所有splide实例，不然开启自动播放时图片简介和图片对不上
+document.addEventListener('pjax:send', () => {
+    destroySplideInstances();
+});
+
+window.splideInstances = [];
+function destroySplideInstances() {
+    window.splideInstances.forEach((instance) => {
+        instance.destroy(); // 销毁实例
+    });
+    window.splideInstances = []; // 清空数组
+}
+
+// Splid 加载处理
+function splideLoadingHandler() {
+    // 检查页面是否含有轮播图片
+    const splideEl = document.querySelector('.splide');
+    if (!splideEl) {
+        return; // 如果不存在轮播，则不执行初始化
+    }
+
+    // 检查是否开启Next主题的动画
+    const isMotionEnabled = typeof CONFIG !== 'undefined' && CONFIG && CONFIG.motion && CONFIG.motion.enable;
+    if (isMotionEnabled) {
+        // Motion 开启时延迟加载轮播组件，等待动画完成。把组件加入动画有bug，一直搞不定，只能曲线救国
+        setTimeout(function () {
+            // 初始化轮播组件
+            initSplide();
+        }, 500);  // 延迟 500ms，确保动画完成后再初始化
+    } else {
+        // Motion 关闭时立即初始化
+        initSplide();
+    }
+
+    // 处理 fancybox，默认设置会切换焦点图片造成轮播组件混乱
+    if (typeof Fancybox !== "undefined") {
+        adjustFancybox();
+    }
+
+    // 初始化轮播组件中的 Medium Zoom
+    if (mediumZoomEnabled) {
+        initCarouselMediumZoom();
+    }
+
+    // 应用主题样式
+    applySplideStyle();
+}
+
+// 初始化 Splide
+function initSplide() {
+    const splideElements = document.querySelectorAll('.splide');
+    splideElements.forEach(splideEl => {
+        const options = JSON.parse(splideEl.getAttribute('data-splide'));
+        // 如果轮播组件中只有一张图片，则隐藏箭头
+        const slideCount = splideEl.querySelectorAll('.splide__slide').length;
+        if (slideCount <= 1) {
+            options.arrows = false;
+        }
+        // 简介设置
+        const splide = new Splide(splideEl, options);
+        splide.on('mounted move', function () {
+            const activeSlide = splide.Components.Slides.getAt(splide.index);
+            const caption = activeSlide.slide.dataset.caption;
+            const captionId = splideEl.getAttribute('data-caption-id');
+
+            const captionElement = document.getElementById(captionId);
+            if (captionElement) {
+                captionElement.innerText = caption || '';  // 如果没有简介，设置为空字符串
+            }
+        });
+        splide.mount();
+        window.splideInstances.push(splide); // 将实例存储到数组中   
+    });
+}
+
+// 应用主题明暗样式
+function applySplideStyle() {
+    const applyThemeStyles = (theme, splideStyles) => {
+        const borderColor = theme === 'dark' ? splideStyles.borderColor.dark : splideStyles.borderColor.light;
+        const shadowColor = theme === 'dark' ? splideStyles.shadowColor.dark : splideStyles.shadowColor.light;
+        document.documentElement.style.setProperty('--carousel-border-color', borderColor);
+        document.documentElement.style.setProperty('--carousel-shadow-color', shadowColor);
+        document.documentElement.style.setProperty('--carousel-border-radius', splideStyles.borderRadius);
+        document.documentElement.style.setProperty('--carousel-arrow-color', splideStyles.arrowColor);
+        document.documentElement.style.setProperty('--carousel-arrow-hover-color', splideStyles.arrowHoverColor);
+        document.documentElement.style.setProperty('--carousel-pagination-color', splideStyles.paginationColor);
+        document.documentElement.style.setProperty('--carousel-pagination-active-color', splideStyles.paginationActiveColor);
+        document.documentElement.style.setProperty('--carousel-pagination-hover-color', splideStyles.paginationHoverColor);
+    };
+
+    let theme = 'light';
+    if (window.splideDarkMode === 'auto') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } else if (window.splideDarkMode === 'true') {
+        theme = 'dark';
+    }
+    applyThemeStyles(theme, window.splideStyles);
+
+    if (window.splideDarkMode === 'auto') {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            applyThemeStyles(e.matches ? 'dark' : 'light', window.splideStyles);
+        });
+    }
+}
+
+// 初始化非轮播图片的 Medium Zoom
+function initGlobalMediumZoom() {
+    // 检查是否启用 medium-zoom
+    if (!mediumZoomEnabled) {
+        return;
+    }
+    const zoomOutsideCarousel = mediumZoom('img:not(.splide .zoomable)', {
+        background: 'rgba(0, 0, 0, 0.8)',
+        margin: 24
+    });
+}
+
+// 初始化轮播组件中的 Medium Zoom
+function initCarouselMediumZoom() {
+    const zoomCarousel = mediumZoom('.zoomable', {
+        background: 'rgba(0, 0, 0, 0.8)',
+        margin: 24,
+        onOpen: (zoom) => {
+            const img = zoom.target; // 获取正在缩放的图片
+            img.classList.add('zooming'); // 添加一个缩放时的 class
+        },
+        onClose: (zoom) => {
+            const img = zoom.target; // 获取缩放的图片
+            img.classList.remove('zooming'); // 移除缩放时的 class
+        }
+    });
+
+    zoomCarousel.on('open', () => {
+        // 隐藏箭头和分页按钮
+        document.querySelectorAll('.splide__arrow, .splide__pagination').forEach(el => {
+            el.style.display = 'none';
+        });
+    });
+
+    zoomCarousel.on('close', () => {
+        // 重新显示箭头和分页按钮
+        document.querySelectorAll('.splide__arrow, .splide__pagination').forEach(el => {
+            el.style.display = '';
+        });
+    });
+}
+
+// fancybox 兼容调整
+function adjustFancybox() {
+    Fancybox.bind("[data-fancybox]", {
+        placeFocusBack: false,  // 禁止 Fancybox 关闭时滚动回页面的焦点位置
+    });
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === "childList") {
+                removeFancyboxFromClones();
+            }
+        });
+    });
+
+    // 观察整个文档的 DOM 变化
+    observer.observe(document, { childList: true, subtree: true });
+}
+
+// 移除克隆 Slide 中的 Fancybox 链接
+function removeFancyboxFromClones() {
+    const cloneSlides = document.querySelectorAll('.splide__slide--clone');
+
+    cloneSlides.forEach((slide) => {
+        const fancyboxLink = slide.querySelector('a.fancybox');
+        if (fancyboxLink) {
+            const img = fancyboxLink.querySelector('img');
+            if (img) {
+                // 将 img 挪出 a 标签
+                fancyboxLink.replaceWith(img);
+            }
+        }
+    });
+}</script>      
+    <!-- hexo injector body_end end --></body>
+
+
+
+				
+
+</html>
