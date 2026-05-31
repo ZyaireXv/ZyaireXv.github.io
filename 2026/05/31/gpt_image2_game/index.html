@@ -1,0 +1,712 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><!-- hexo injector head_begin start -->
+      <link href="https://unpkg.com/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+      <style type="text/css">/* 轮播边框 */
+.splide {
+    /* 边框颜色和宽度 */
+    border: 2px solid var(--carousel-border-color);
+    /* 阴影 */
+    box-shadow: 0px 4px 8px var(--carousel-shadow-color);
+    /* 圆角 */
+    border-radius: var(--carousel-border-radius);
+}
+
+/* 确保图片的显示与适配 */
+.splide__slide img {
+    width: 100%;
+    height: 100%;
+    /* 确保图片全部显示且占满组件 */
+    object-fit: contain;
+}
+
+.carousel-container {
+    visibility: inherit;
+    /* 调整与上方元素的距离 */
+    margin-top: 20px;
+    /* 调整与下方元素的距离 */
+    margin-bottom: 20px;
+}
+
+/* 图片简介 */
+.carousel-caption {
+    min-height: 2em;
+    /* 设置行高，让文字垂直居中 */
+    line-height: 2em;
+    text-align: center;
+    font-size: 0.9em;
+    font-style: italic;
+    padding: 6px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 左右切换按钮 */
+.splide__arrow {
+    background: transparent;
+    align-items: center;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    height: 5em;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5em;
+    z-index: 10;
+}
+
+/* 禁用状态的切换按钮 */
+.splide__arrow:disabled {
+    opacity: 0;
+}
+
+/* 左右切换按钮的定位 */
+.splide__arrow--prev {
+    left: 0;
+}
+
+.splide__arrow--next {
+    right: 0;
+}
+
+/* 切换按钮中的箭头图标 */
+.splide__arrow svg {
+    /* 动态设置箭头颜色 */
+    fill: var(--carousel-arrow-color);
+    height: 2.5em;
+    transition: fill 0.2s linear;
+    width: 2.5em;
+}
+
+.splide__arrow:hover:not(:disabled) svg {
+    /* 悬停时的箭头颜色 */
+    fill: var(--carousel-arrow-hover-color);
+}
+
+/* 隐藏难看的选中边框 */
+.splide__arrow:focus-visible {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide.is-focus-in .splide__arrow:focus {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide__pagination__page:focus-visible {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+.splide.is-focus-in .splide__pagination__page:focus {
+    outline: transparent;
+    outline-offset: 0;
+}
+
+/* 分页按钮样式 */
+.splide__pagination {
+    bottom: 1em;
+    left: 0;
+    padding: 0 1em;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+/* 分页按钮外观 */
+.splide__pagination__page {
+    background: var(--carousel-pagination-color);
+    border: 0;
+    border-radius: 2.5px;
+    display: inline-block;
+    height: 5px;
+    margin: 3px;
+    width: 20px;
+    transition: background-color 0.2s linear;
+}
+
+.splide__pagination__page.is-active {
+    background: var(--carousel-pagination-active-color);
+}
+
+.splide__pagination__page:hover {
+    background: var(--carousel-pagination-hover-color);
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+/* 使用伪元素增加点击区域 */
+.splide__pagination__page::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: -18px;
+    left: -4px;
+    right: -4px;
+}
+
+.splide__pagination__page.is-active::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    bottom: -12px;
+    left: -1px;
+    right: -1px;
+}
+
+/* 在放大时按比例缩放，配合 JS 进行调整 */
+.zoomable {
+    /* 缩放时按比例显示 */
+    object-fit: contain;
+}
+
+/* Zooming 时调整图片的最大尺寸，但不影响宽高比例 */
+.zooming {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    object-fit: contain !important;
+}</style>
+      <!-- hexo injector head_begin end -->
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_zyaire.jpg" />
+	<link rel="shortcut icon" href="/img/logo_zyaire.jpg">
+	
+				    <title>
+    Zyaire's Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta name="keywords" content="zyaire" />
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.png') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+					    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+						
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+			
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">ZYAIRE</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li><a class="category-link" href="/categories/%E6%97%85%E8%A1%8C/">旅行</a></li><li><a class="category-link" href="/categories/%E8%AF%97%E6%AD%8C/">诗歌</a>
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">归档</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        <a class="archive-link" href="/archives/2026/05/">May 2026</a></li><li><a class="archive-link" href="/archives/2026/02/">February 2026</a></li><li><a class="archive-link" href="/archives/2025/03/">March 2025</a></li><li><a class="archive-link" href="/archives/2024/04/">April 2024</a>
+	                    </ul>
+	        </li>
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/china/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/korea/" title="韩国图库">
+		                韩国图库
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/ZyaireXv" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a title="instagram" href="https://www.instagram.com/zyaireshu/" target="_blank" rel="noopener">
+                            <i class="icon fa fa-instagram"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(/images/gpt-image2-game/kitty-grid-icon.png);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >通过GPT-Image2我用了一周时间做了一个游戏并且上架了APP Store</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <style>
+    
+    /*手机*/
+        @media screen and (max-width:600px){
+            .center-div{
+                margin: 0 auto;
+                width: 100%;
+            }
+            .wide-div{
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+        /*平板*/
+        @media screen and (min-width:600px) and (max-width:960px){
+            .center-div{
+                margin: 0 auto;
+                width: 80%;
+            }
+            .wide-div{
+                margin: 0 auto;
+                width: 90%;
+            }
+        }
+        /*PC*/
+        @media screen and (min-width:960px){
+            .center-div{
+                margin: 0 auto;
+                width: 50%;
+            }
+            .wide-div{
+                margin: 0 auto;
+                width: 70%;
+            }
+        }
+    .red-bold{
+        color: #ff66b3;
+        font-weight: bold;
+    }
+    .blue-bold{
+        color: #85edff;
+        font-weight: bold;
+    }
+ </style>   
+<h1 id="通过GPT-Image2我用了一周时间做了一个游戏并且上架了APP-Store"><a href="#通过GPT-Image2我用了一周时间做了一个游戏并且上架了APP-Store" class="headerlink" title="通过GPT-Image2我用了一周时间做了一个游戏并且上架了APP Store"></a>通过GPT-Image2我用了一周时间做了一个游戏并且上架了APP Store</h1><p>这个游戏叫<a target="_blank" rel="noopener" href="https://apps.apple.com/tw/app/kitty-grid/id6767810279">Kitty Grid</a>，（中文名：喵喵静悄悄）是一个类似八皇后问题的逻辑解谜游戏。规则很简单，每一行，每一列，每一个色块区域都有一只小猫，并且小猫之间不能相邻，连斜角也不可以贴在一起。玩家需要根据这些规则，把不可能的位置标记成 X，再翻开有把握的格子。</p>
+<p>说实话，我一开始也没有想到这个东西最后会真的上架 App Store。我最开始只是想试一下 GPT-Image2 到底能不能帮我做出一套完整的游戏美术资源，结果做着做着，就变成了一个完整的小项目。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-1kmkusyiu">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="Kitty Grid 图标"><img src="/images/gpt-image2-game/kitty-grid-icon.png" alt="Kitty Grid 图标" class="zoomable"></li><li class="splide__slide" data-caption="Kitty Grid App Store 页面"><img src="/images/gpt-image2-game/kitty-grid-app-store.png" alt="Kitty Grid App Store 页面" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-1kmkusyiu" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<h2 id="游戏本体"><a href="#游戏本体" class="headerlink" title="游戏本体"></a>游戏本体</h2><p>Kitty Grid 的玩法核心其实很克制。它没有复杂的剧情，也没有很重的数值系统，主要就是围绕一个棋盘做推理。我希望它可以在几分钟内玩完一局，但是又不能变成纯靠运气乱点。所以关卡本身需要保证唯一解，并且最好能通过比较自然的逻辑推出来。</p>
+<p>游戏是用 Flutter 做的，棋盘部分用了 Flame。这里真正花时间的是交互细节。比如点一下标记 X，双击翻开格子，这个看起来很普通，但是双击时间如果太短，玩家会觉得怎么打不了X；如果太长，又会影响标记的手感。最后我把双击窗口调整到了 320ms，体感上会舒服很多。</p>
+<p>关卡这块我做了一个离线 Python 生成器。规则是每行，每列，每个色块区域恰好一只猫，小猫之间不能八方向相邻，色块区域必须正交连通。生成器会校验唯一解，也会用轻量逻辑求解器过滤掉那种机器有唯一解，但是玩家只能猜的关卡。首发版本内置 1-100 关。</p>
+<p>这里有一个很现实的问题：如果只是做一个能玩的 Demo，其实很快。但是要上架，就会多出很多看起来不属于游戏本身的事情。比如多语言，隐私政策，广告配置，内购配置，体力恢复，金币奖励，失败和通关结算，还有各种边缘状态。这些东西单独看都不大，但是加起来很消耗时间。</p>
+<div class="center-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-o51rtpmsl">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="Kitty Grid 首页"><img src="/images/gpt-image2-game/home.webp" alt="Kitty Grid 首页" class="zoomable"></li><li class="splide__slide" data-caption="Kitty Grid 关卡地图"><img src="/images/gpt-image2-game/levels.webp" alt="Kitty Grid 关卡地图" class="zoomable"></li><li class="splide__slide" data-caption="Kitty Grid 棋盘"><img src="/images/gpt-image2-game/game.webp" alt="Kitty Grid 棋盘" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-o51rtpmsl" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<h2 id="为什么会做-ImageKnifeWeb"><a href="#为什么会做-ImageKnifeWeb" class="headerlink" title="为什么会做 ImageKnifeWeb"></a>为什么会做 ImageKnifeWeb</h2><p>这次最有意思的地方其实是 ImageKnifeWeb（<span class="blue-bold"><a target="_blank" rel="noopener" href="https://imageknife.newaimi.com/">像素工坊</a></span>）。它是我为了做这个游戏顺手做出来的一个游戏图片资源处理工具。<a target="_blank" rel="noopener" href="https://imageknife.newaimi.com/">https://imageknife.newaimi.com/</a> 点击链接即可使用。</p>
+<p>GPT-Image2 生成图片的效果确实不错，尤其是小猫，按钮，背景，UI 装饰这些素材，但是对于我这样一个之前完全没有接触过游戏的人来说，这些图片资源的处理简直就是恶梦。图片可能带背景，可能尺寸不统一，可能一张图里有很多小元素，可能边缘有一点脏，也可能生成出来的图很好看，但是游戏里需要的是带透明通道的PNG。</p>
+<p>如果每一张图都手动打开修图软件处理，那这一周大概率就全花在整理素材上了，更何况我本人连抠图都不会。所以我干脆做了 ImageKnifeWeb，能给我这种小白一站式的图片资源解决方案。</p>
+<div class="wide-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-0lzl2inm3">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="ImageKnifeWeb 去背景原图"><img src="/images/gpt-image2-game/remove-bg/origin.png" alt="ImageKnifeWeb 去背景原图" class="zoomable"></li><li class="splide__slide" data-caption="ImageKnifeWeb 素材板识别"><img src="/images/gpt-image2-game/asset-board/origin.png" alt="ImageKnifeWeb 素材板识别" class="zoomable"></li><li class="splide__slide" data-caption="ImageKnifeWeb 图片放大"><img src="/images/gpt-image2-game/scale-up/a.png" alt="ImageKnifeWeb 图片放大" class="zoomable"></li><li class="splide__slide" data-caption="ImageKnifeWeb 视频转帧"><img src="/images/gpt-image2-game/frame/video.png" alt="ImageKnifeWeb 视频转帧" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-0lzl2inm3" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<h3 id="AI-去背景"><a href="#AI-去背景" class="headerlink" title="AI 去背景"></a>AI 去背景</h3><p>第一个功能是 AI 去背景。它主要负责把 GPT-Image2 生成的角色，道具，图标变成透明 PNG。后端用 FastAPI，推理部分会优先走 CUDA，页面上也能看到当前设备状态。这里我没有把它做成纯单机脚本，因为游戏资源处理会反复出现，后面每次改图都会重新用到。</p>
+<div class="wide-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-hiwdyvy8x">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="去背景前的原图"><img src="/images/gpt-image2-game/remove-bg/origin.png" alt="去背景前的原图" class="zoomable"></li><li class="splide__slide" data-caption="去背景后的结果"><img src="/images/gpt-image2-game/remove-bg/rmbg.png" alt="去背景后的结果" class="zoomable"></li><li class="splide__slide" data-caption="双击预览去背景结果"><img src="/images/gpt-image2-game/remove-bg/double-click.png" alt="双击预览去背景结果" class="zoomable"></li><li class="splide__slide" data-caption="进入手动编辑继续处理"><img src="/images/gpt-image2-game/remove-bg/manual-edit.png" alt="进入手动编辑继续处理" class="zoomable"></li><li class="splide__slide" data-caption="暗色模式下检查透明边缘"><img src="/images/gpt-image2-game/remove-bg/dark-theme.png" alt="暗色模式下检查透明边缘" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-hiwdyvy8x" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<p>去背景功能看起来很简单，但是它解决的是一个很烦的问题。游戏里大量素材都要求透明背景，如果每次都靠手工抠图，效率会很低。现在只要上传图片，开始处理，得到的结果就可以继续放大，编辑，或者直接进入游戏工程。</p>
+<h3 id="素材板拆分"><a href="#素材板拆分" class="headerlink" title="素材板拆分"></a>素材板拆分</h3><p>第二个很关键的功能是素材板拆分。GPT-Image2 有时候会一次生成一整张 UI 素材板，比如按钮，星星，金币，装饰物全在一张图里。直接把整张图放进游戏没有意义，真正需要的是把其中每一个小元素单独导出来。</p>
+<p>ImageKnifeWeb 的素材板流程大概是：先识别原图里的素材区域，再做抠图，然后把识别到的框展示出来。框的位置如果不准，可以手动调；某些元素不想要，也可以取消选择。最后导出时会把选中的组件打成一个 zip，里面每个组件都是独立 PNG。这个功能对我这次做游戏帮助很大，因为 UI 元素基本都要走这个流程。</p>
+<div class="wide-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-lie3iwwzw">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="素材板区域识别"><img src="/images/gpt-image2-game/asset-board/origin.png" alt="素材板区域识别" class="zoomable"></li><li class="splide__slide" data-caption="素材板去背景结果"><img src="/images/gpt-image2-game/asset-board/removebg.png" alt="素材板去背景结果" class="zoomable"></li><li class="splide__slide" data-caption="取消选择和调整框选"><img src="/images/gpt-image2-game/asset-board/cancel-select-and-adjust.png" alt="取消选择和调整框选" class="zoomable"></li><li class="splide__slide" data-caption="查看单个组件细节"><img src="/images/gpt-image2-game/asset-board/asset-part-details.png" alt="查看单个组件细节" class="zoomable"></li><li class="splide__slide" data-caption="单个组件进入手动编辑"><img src="/images/gpt-image2-game/asset-board/manual-edit.png" alt="单个组件进入手动编辑" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-lie3iwwzw" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<h3 id="图片放大和手动编辑"><a href="#图片放大和手动编辑" class="headerlink" title="图片放大和手动编辑"></a>图片放大和手动编辑</h3><p>图片放大主要是为了解决素材尺寸不够的问题。游戏里有些地方需要高清图，但是 GPT-Image2 生成出来的图并不一定刚好符合使用尺寸。ImageKnifeWeb 里有通用，动漫，噪点图，像素图几种模式，通用和动漫会走 Real-ESRGAN，像素图则直接用近邻放大，避免把像素风素材糊掉。</p>
+<div class="wide-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-ci1ssqfic">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="图片放大通用素材对比"><img src="/images/gpt-image2-game/scale-up/a.png" alt="图片放大通用素材对比" class="zoomable"></li><li class="splide__slide" data-caption="图片放大线稿素材对比"><img src="/images/gpt-image2-game/scale-up/b.png" alt="图片放大线稿素材对比" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-ci1ssqfic" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<p>手动编辑则是给 AI 结果兜底用的。AI 去背景很方便，但它不会永远完美。有时候边缘会多出一点不该有的颜色，有时候小区域需要补一下，有时候需要把透明背景合成到固定底色上预览。所以我把画笔，橡皮，魔棒，选区，图层这些基础编辑能力放到了同一个工具里。</p>
+<h3 id="序列帧和视频转帧"><a href="#序列帧和视频转帧" class="headerlink" title="序列帧和视频转帧"></a>序列帧和视频转帧</h3><p>ImageKnifeWeb 后面还加了序列帧相关功能。比如导入一组序列帧后，统一清理背景，裁切，补画布，对齐锚点，再导出 PNG 序列和 Sprite Sheet。还有 AI 生成视频和视频转帧，流程是先用外部视频生成 API 让角色动起来，再把视频抽帧，清理成游戏能用的透明序列帧。</p>
+<div class="wide-div">
+
+    <div class="carousel-container">
+      <div class="splide" data-splide='{"heightRatio":0.618,"lazyLoad":false,"type":"slide","autoplay":false,"interval":3000,"pauseOnHover":true}' data-caption-id="carousel-caption-2fad5kfv2">
+        <div class="splide__track">
+          <ul class="splide__list"><li class="splide__slide" data-caption="导入视频后准备抽帧"><img src="/images/gpt-image2-game/frame/video.png" alt="导入视频后准备抽帧" class="zoomable"></li><li class="splide__slide" data-caption="序列帧逐帧编辑"><img src="/images/gpt-image2-game/frame/frame-edit.png" alt="序列帧逐帧编辑" class="zoomable"></li><li class="splide__slide" data-caption="序列帧清洗后的结果"><img src="/images/gpt-image2-game/frame/frame-result.png" alt="序列帧清洗后的结果" class="zoomable"></li></ul>
+        </div>
+      </div>
+      <div id="carousel-caption-2fad5kfv2" class="carousel-caption"> </div>
+    </div>
+  
+</div>
+
+<p>这个功能在这次游戏里还没有大量使用，但是方向很明确。很多小游戏真正缺的是一套能播放的动作资源。只要这条链路打通，之后做 2D 游戏会轻松很多。</p>
+<h2 id="GPT-Image2"><a href="#GPT-Image2" class="headerlink" title="GPT-Image2"></a>GPT-Image2</h2><p>这次 GPT-Image2 最主要负责的是美术探索和素材生成。比如小猫图标，UI 风格，背景氛围，按钮质感，奖励弹窗里的装饰，都可以先通过它快速出图。以前我做独立项目的时候，经常会卡在美术上，因为我知道自己想要什么感觉，但是我没有足够快的美术产出能力。</p>
+<p>这一次明显不一样。我可以先把想法用文字描述出来，让 GPT-Image2 生成一个方向，然后继续调整提示词。满意之后，再把图片丢进 ImageKnifeWeb，去背景，拆素材，放大，导出，最后放进 Flutter 工程里调布局。</p>
+<p>当然，用 AI 做美术也不会让游戏自动完成。真正的工作仍然很多。规则要自己设计，关卡要自己验证，交互要自己调，Flutter 工程要自己写，App Store 的材料也要自己准备。AI 解决的是素材产出的速度问题，工程落地仍然需要耐心。</p>
+<h2 id="上架这件事"><a href="#上架这件事" class="headerlink" title="上架这件事"></a>上架这件事</h2><p>上架 App Store 这一步其实比我想象中顺利。Kitty Grid现在是免费游戏，有广告，也有去广告内购。App Store 已经可以搜索到。看到它真的出现在商店里的时候，我还是有点开心的。</p>
+<p>不过我也必须承认，首版肯定还有很多地方可以继续改。比如关卡数量，动画资源，音效，教程节奏，远端关卡预览，广告频控，这些都还可以慢慢打磨。现在这个版本对我来说更像是一个证明：一个人可以借助 AI 先把想法做成一个真的能上架的产品。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这次一周做完 Kitty Grid，对我最大的收获是我第一次比较完整地感受到，AI 可以把个人开发者最容易卡住的一环往前推一大步。以前没有美术资源，我可能会先拖着；现在我可以先做出来，再根据真实效果继续改。</p>
+<p>ImageKnifeWeb 也会继续做下去。因为只要还在做游戏，只要还在用 AI 生成图片，就一定会遇到素材清理，拆分，放大，导出这些重复问题。把这些问题积累成工具，比每次临时处理一张图要划算很多。</p>
+<p>这篇就先写到这里。后面如果 Kitty Grid 有新的版本，或者 ImageKnifeWeb 的序列帧和骨骼拆分做得更成熟了，我应该还会继续写。</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a target="_blank" rel="noopener" href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+<!-- hexo injector body_end start -->
+      <script src="https://unpkg.com/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+      <script>
+        window.splideStyles = {"arrowColor":"#fc8d5d","arrowHoverColor":"#fc6423","paginationColor":"#fc8d5d","paginationActiveColor":"#fc6423","paginationHoverColor":"#fc6423","borderRadius":"1px","borderColor":{"light":"#eee","dark":"#444"},"shadowColor":{"light":"rgba(0, 0, 0, 0.1)","dark":"rgba(0, 0, 0, 0.3)"}};
+        window.splideDarkMode = 'auto';
+        window.mediumZoomEnabled = false;
+      </script>
+      <script type="text/javascript">// 页面加载事件监听
+document.addEventListener('DOMContentLoaded', function () {
+    splideLoadingHandler();
+    initGlobalMediumZoom();
+});
+
+document.addEventListener('pjax:success', function () {
+    splideLoadingHandler();
+    initGlobalMediumZoom();
+});
+
+// PJAX开启时销毁所有splide实例，不然开启自动播放时图片简介和图片对不上
+document.addEventListener('pjax:send', () => {
+    destroySplideInstances();
+});
+
+window.splideInstances = [];
+function destroySplideInstances() {
+    window.splideInstances.forEach((instance) => {
+        instance.destroy(); // 销毁实例
+    });
+    window.splideInstances = []; // 清空数组
+}
+
+// Splid 加载处理
+function splideLoadingHandler() {
+    // 检查页面是否含有轮播图片
+    const splideEl = document.querySelector('.splide');
+    if (!splideEl) {
+        return; // 如果不存在轮播，则不执行初始化
+    }
+
+    // 检查是否开启Next主题的动画
+    const isMotionEnabled = typeof CONFIG !== 'undefined' && CONFIG && CONFIG.motion && CONFIG.motion.enable;
+    if (isMotionEnabled) {
+        // Motion 开启时延迟加载轮播组件，等待动画完成。把组件加入动画有bug，一直搞不定，只能曲线救国
+        setTimeout(function () {
+            // 初始化轮播组件
+            initSplide();
+        }, 500);  // 延迟 500ms，确保动画完成后再初始化
+    } else {
+        // Motion 关闭时立即初始化
+        initSplide();
+    }
+
+    // 处理 fancybox，默认设置会切换焦点图片造成轮播组件混乱
+    if (typeof Fancybox !== "undefined") {
+        adjustFancybox();
+    }
+
+    // 初始化轮播组件中的 Medium Zoom
+    if (mediumZoomEnabled) {
+        initCarouselMediumZoom();
+    }
+
+    // 应用主题样式
+    applySplideStyle();
+}
+
+// 初始化 Splide
+function initSplide() {
+    const splideElements = document.querySelectorAll('.splide');
+    splideElements.forEach(splideEl => {
+        const options = JSON.parse(splideEl.getAttribute('data-splide'));
+        // 如果轮播组件中只有一张图片，则隐藏箭头
+        const slideCount = splideEl.querySelectorAll('.splide__slide').length;
+        if (slideCount <= 1) {
+            options.arrows = false;
+        }
+        // 简介设置
+        const splide = new Splide(splideEl, options);
+        splide.on('mounted move', function () {
+            const activeSlide = splide.Components.Slides.getAt(splide.index);
+            const caption = activeSlide.slide.dataset.caption;
+            const captionId = splideEl.getAttribute('data-caption-id');
+
+            const captionElement = document.getElementById(captionId);
+            if (captionElement) {
+                captionElement.innerText = caption || '';  // 如果没有简介，设置为空字符串
+            }
+        });
+        splide.mount();
+        window.splideInstances.push(splide); // 将实例存储到数组中   
+    });
+}
+
+// 应用主题明暗样式
+function applySplideStyle() {
+    const applyThemeStyles = (theme, splideStyles) => {
+        const borderColor = theme === 'dark' ? splideStyles.borderColor.dark : splideStyles.borderColor.light;
+        const shadowColor = theme === 'dark' ? splideStyles.shadowColor.dark : splideStyles.shadowColor.light;
+        document.documentElement.style.setProperty('--carousel-border-color', borderColor);
+        document.documentElement.style.setProperty('--carousel-shadow-color', shadowColor);
+        document.documentElement.style.setProperty('--carousel-border-radius', splideStyles.borderRadius);
+        document.documentElement.style.setProperty('--carousel-arrow-color', splideStyles.arrowColor);
+        document.documentElement.style.setProperty('--carousel-arrow-hover-color', splideStyles.arrowHoverColor);
+        document.documentElement.style.setProperty('--carousel-pagination-color', splideStyles.paginationColor);
+        document.documentElement.style.setProperty('--carousel-pagination-active-color', splideStyles.paginationActiveColor);
+        document.documentElement.style.setProperty('--carousel-pagination-hover-color', splideStyles.paginationHoverColor);
+    };
+
+    let theme = 'light';
+    if (window.splideDarkMode === 'auto') {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } else if (window.splideDarkMode === 'true') {
+        theme = 'dark';
+    }
+    applyThemeStyles(theme, window.splideStyles);
+
+    if (window.splideDarkMode === 'auto') {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            applyThemeStyles(e.matches ? 'dark' : 'light', window.splideStyles);
+        });
+    }
+}
+
+// 初始化非轮播图片的 Medium Zoom
+function initGlobalMediumZoom() {
+    // 检查是否启用 medium-zoom
+    if (!mediumZoomEnabled) {
+        return;
+    }
+    const zoomOutsideCarousel = mediumZoom('img:not(.splide .zoomable)', {
+        background: 'rgba(0, 0, 0, 0.8)',
+        margin: 24
+    });
+}
+
+// 初始化轮播组件中的 Medium Zoom
+function initCarouselMediumZoom() {
+    const zoomCarousel = mediumZoom('.zoomable', {
+        background: 'rgba(0, 0, 0, 0.8)',
+        margin: 24,
+        onOpen: (zoom) => {
+            const img = zoom.target; // 获取正在缩放的图片
+            img.classList.add('zooming'); // 添加一个缩放时的 class
+        },
+        onClose: (zoom) => {
+            const img = zoom.target; // 获取缩放的图片
+            img.classList.remove('zooming'); // 移除缩放时的 class
+        }
+    });
+
+    zoomCarousel.on('open', () => {
+        // 隐藏箭头和分页按钮
+        document.querySelectorAll('.splide__arrow, .splide__pagination').forEach(el => {
+            el.style.display = 'none';
+        });
+    });
+
+    zoomCarousel.on('close', () => {
+        // 重新显示箭头和分页按钮
+        document.querySelectorAll('.splide__arrow, .splide__pagination').forEach(el => {
+            el.style.display = '';
+        });
+    });
+}
+
+// fancybox 兼容调整
+function adjustFancybox() {
+    Fancybox.bind("[data-fancybox]", {
+        placeFocusBack: false,  // 禁止 Fancybox 关闭时滚动回页面的焦点位置
+    });
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === "childList") {
+                removeFancyboxFromClones();
+            }
+        });
+    });
+
+    // 观察整个文档的 DOM 变化
+    observer.observe(document, { childList: true, subtree: true });
+}
+
+// 移除克隆 Slide 中的 Fancybox 链接
+function removeFancyboxFromClones() {
+    const cloneSlides = document.querySelectorAll('.splide__slide--clone');
+
+    cloneSlides.forEach((slide) => {
+        const fancyboxLink = slide.querySelector('a.fancybox');
+        if (fancyboxLink) {
+            const img = fancyboxLink.querySelector('img');
+            if (img) {
+                // 将 img 挪出 a 标签
+                fancyboxLink.replaceWith(img);
+            }
+        }
+    });
+}</script>      
+    <!-- hexo injector body_end end --></body>
+
+
+
+				
+
+</html>
